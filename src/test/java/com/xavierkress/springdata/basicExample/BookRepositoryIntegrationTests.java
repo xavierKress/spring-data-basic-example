@@ -23,9 +23,12 @@ public class BookRepositoryIntegrationTests {
     @BeforeEach
     void setUp() {
         book = new Book(1L, "book1", "ISBN1");
+        books.insertBook(book.getId(), book.getTitle(), book.getIsbn());
     }
 
     @Test
     public void findBook(){
+        List<Book> result = books.findByTitleContains(book.getTitle());
+        assertEquals(book, result.get(0));
     }
 }
