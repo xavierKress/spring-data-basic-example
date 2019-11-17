@@ -23,7 +23,7 @@ public class BookRepositoryIntegrationTests {
     @BeforeEach
     void setUp() {
         book = new Book(1L, "book1", "ISBN1");
-        books.insertBook(book.getId(), book.getTitle(), book.getIsbn());
+        books.save(book);
     }
 
     @Test
