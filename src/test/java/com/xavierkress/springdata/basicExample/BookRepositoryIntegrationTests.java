@@ -27,8 +27,8 @@ public class BookRepositoryIntegrationTests {
     }
 
     @Test
-    public void findBook(){
-        List<Book> result = books.findByTitleContains(book.getTitle());
+    public void findBook() {
+        List<Book> result = books.findByTitle(book.getTitle());
         assertEquals(book, result.get(0));
     }
 }
