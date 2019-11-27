@@ -24,6 +24,7 @@ public class BookRepositoryIntegrationTests {
     private BookRepository books;
 
     private Book book, book2, book3, book4, book5;
+    private Sort byTitleDescending;
 
     @BeforeEach
     void setUp() {
@@ -35,25 +36,45 @@ public class BookRepositoryIntegrationTests {
 
         List<Book> customers = Arrays.asList(book, book2, book3, book4, book5);
         books.saveAll(customers);
+        byTitleDescending = Sort.by("title").descending();
     }
 
     @Test
     public void findBook() {
         List<Book> result = books.findByTitleContains(book.getTitle());
         assertEquals(book, result.get(0));
+    }
 
-        List<Book> descSortedBooks = books.findAll(Sort.by("title").descending());
+    @Test
+    public void findSortedBooks(){
+        List<Book> descSortedBooks = books.findAll(byTitleDescending);
 
+        // Test the order
         assertEquals("book5", descSortedBooks.get(0).getTitle());
         assertEquals("book4", descSortedBooks.get(1).getTitle());
+        assertEquals("book1", descSortedBooks.get(4).getTitle());
+    }
 
 
-        Pageable pageable = PageRequest.of(0, 2, Sort.by("title").descending());
+    @Test
+    public void pageAndSort(){
+
+        Pageable pageable = PageRequest.of(0, 2, byTitleDescending);
         Page<Book> pagedSortedBooks = books.findAll(pageable);
 
+        Pageable pageable2 = PageRequest.of(2, 2, byTitleDescending);
+        Page<Book> paged2SortedBooks = books.findAll(pageable2);
+
+        List<Book> pagedBooks = pagedSortedBooks.getContent();
+        List<Book> pagedBooks2 = paged2SortedBooks.getContent();
+
+        assertEquals(0, pagedSortedBooks.getNumber());
+        assertEquals(2, pagedSortedBooks.getSize());
         assertEquals(3, pagedSortedBooks.getTotalPages());
         assertEquals(5, pagedSortedBooks.getTotalElements());
-
-
+        assertEquals(true, pagedSortedBooks.isFirst());
+        assertEquals(true, paged2SortedBooks.isLast());
+        assertEquals(2, pagedBooks.size());
+        assertEquals(1, pagedBooks2.size());
     }
 }
