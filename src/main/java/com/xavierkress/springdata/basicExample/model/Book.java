@@ -16,18 +16,7 @@ public class Book {
 
     private String isbn;
 
-    @ManyToMany
-    @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "author_id"))
-    private Set<Author> authors = new HashSet<>();
-
     public Book() {
-    }
-
-    public Book(Long id, String title, String isbn, Set<Author> authors) {
-        this.id = id;
-        this.title = title;
-        this.isbn = isbn;
-        this.authors = authors;
     }
 
     public Book(long id, String title, String isbn) {
@@ -60,14 +49,6 @@ public class Book {
         this.isbn = isbn;
     }
 
-    public Set<Author> getAuthors() {
-        return authors;
-    }
-
-    public void setAuthors(Set<Author> authors) {
-        this.authors = authors;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -80,7 +61,6 @@ public class Book {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(getId(), getTitle(), getIsbn());
     }
 }
