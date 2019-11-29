@@ -36,6 +36,7 @@ public class BookRepositoryIntegrationTests {
 
         List<Book> customers = Arrays.asList(book, book2, book3, book4, book5);
         books.saveAll(customers);
+        books.
         byTitleDescending = Sort.by("title").descending();
     }
 
@@ -50,9 +51,11 @@ public class BookRepositoryIntegrationTests {
         List<Book> descSortedBooks = books.findAll(byTitleDescending);
 
         // Test the order
-        assertEquals("book5", descSortedBooks.get(0).getTitle());
-        assertEquals("book4", descSortedBooks.get(1).getTitle());
-        assertEquals("book1", descSortedBooks.get(4).getTitle());
+        assertEquals(book5, descSortedBooks.get(0));
+        assertEquals(book4, descSortedBooks.get(1));
+        assertEquals(book3, descSortedBooks.get(2));
+        assertEquals(book2, descSortedBooks.get(3));
+        assertEquals(book, descSortedBooks.get(4));
     }
 
 
@@ -69,6 +72,7 @@ public class BookRepositoryIntegrationTests {
         List<Book> pagedBooks2 = paged2SortedBooks.getContent();
 
         assertEquals(0, pagedSortedBooks.getNumber());
+        assertEquals(2, paged2SortedBooks.getNumber());
         assertEquals(2, pagedSortedBooks.getSize());
         assertEquals(3, pagedSortedBooks.getTotalPages());
         assertEquals(5, pagedSortedBooks.getTotalElements());
