@@ -10,7 +10,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.List;
 
-public interface BookRepository extends PagingAndSortingRepository<Book, Long> {
+public interface BookRepository extends PagingAndSortingRepository<Book, Long>, BookRepositoryCustom {
 
     List<Book> findByTitleContains(String title);
 

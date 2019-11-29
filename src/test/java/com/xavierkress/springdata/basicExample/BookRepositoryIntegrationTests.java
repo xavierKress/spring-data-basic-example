@@ -57,9 +57,16 @@ public class BookRepositoryIntegrationTests {
         assertEquals(book, descSortedBooks.get(4));
     }
 
+    @Test
+    public void customMethod() {
+
+        Book b = books.myCustomMethod();
+        assertEquals(null, b);
+    }
 
     @Test
     public void pageAndSort(){
+
 
         Pageable pageable = PageRequest.of(0, 2, byTitleDescending);
         Page<Book> pagedSortedBooks = books.findAll(pageable);
