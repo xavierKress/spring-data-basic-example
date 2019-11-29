@@ -36,7 +36,6 @@ public class BookRepositoryIntegrationTests {
 
         List<Book> customers = Arrays.asList(book, book2, book3, book4, book5);
         books.saveAll(customers);
-        books.
         byTitleDescending = Sort.by("title").descending();
     }
 

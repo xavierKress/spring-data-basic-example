@@ -10,6 +10,12 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.List;
 
-public interface BookRepository extends BaseRepository<Book, Long> {
+public interface BookRepository extends PagingAndSortingRepository<Book, Long> {
+
+    List<Book> findByTitleContains(String title);
+
+    List<Book> findAll(Sort sort);
+
+    Page<Book> findAll(Pageable pageable);
 
 }
