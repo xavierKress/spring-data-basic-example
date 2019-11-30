@@ -34,10 +34,11 @@ public class BookRepositoryIntegrationTests {
         book4 = new Book(4L, "book4", "ISBN2");
         book5 = new Book(5L, "book5", "ISBN2");
 
-        List<Book> customers = Arrays.asList(book, book2, book3, book4, book5);
-        books.saveAll(customers);
+        List<Book> newBooks = Arrays.asList(book, book2, book3, book4, book5);
+        books.saveAll(newBooks);
         byTitleDescending = Sort.by("title").descending();
     }
+
 
     @Test
     public void findBook() {
@@ -87,4 +88,5 @@ public class BookRepositoryIntegrationTests {
         assertEquals(2, pagedBooks.size());
         assertEquals(1, pagedBooks2.size());
     }
+
 }
