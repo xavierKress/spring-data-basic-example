@@ -1,17 +1,13 @@
 package com.xavierkress.springdata.basicExample.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.data.annotation.Id;
 import java.util.Objects;
 
-@Entity
+
 public class Book {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private String id;
 
     private String title;
 
@@ -20,17 +16,16 @@ public class Book {
     public Book() {
     }
 
-    public Book(long id, String title, String isbn) {
-        this.id = id;
+    public Book(String title, String isbn) {
         this.title = title;
         this.isbn = isbn;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
