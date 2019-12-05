@@ -22,9 +22,9 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
     private void initData() {
         book = new Book("book1", "ISBN1");
         book2 = new Book("book2", "ISBN2");
-        book3 = new Book("book3", "ISBN2");
-        book4 = new Book("book4", "ISBN2");
-        book5 = new Book("book5", "ISBN2");
+        book3 = new Book("book3", "ISBN3");
+        book4 = new Book("book4", "ISBN4");
+        book5 = new Book("book5", "ISBN5");
 
         List<Book> newBooks = Arrays.asList(book, book2, book3, book4, book5);
         books.saveAll(newBooks);

@@ -25,17 +25,11 @@ public class BookRepositoryIntegrationTests {
 
     private Book book, book2, book3, book4, book5;
     private Sort byTitleDescending;
+    private List<Book> resultBooks;
 
     @BeforeEach
     void setUp() {
-        book = new Book("book1", "ISBN1");
-        book2 = new Book("book2", "ISBN2");
-        book3 = new Book("book3", "ISBN2");
-        book4 = new Book("book4", "ISBN2");
-        book5 = new Book("book5", "ISBN2");
-
-        List<Book> newBooks = Arrays.asList(book, book2, book3, book4, book5);
-        books.saveAll(newBooks);
+        resultBooks = books.findAll();
         byTitleDescending = Sort.by("title").descending();
     }
 
@@ -49,13 +43,13 @@ public class BookRepositoryIntegrationTests {
     @Test
     public void findSortedBooks(){
         List<Book> descSortedBooks = books.findAll(byTitleDescending);
-
+        System.out.println(descSortedBooks);
         // Test the order
-        assertEquals(book5, descSortedBooks.get(0));
-        assertEquals(book4, descSortedBooks.get(1));
-        assertEquals(book3, descSortedBooks.get(2));
-        assertEquals(book2, descSortedBooks.get(3));
-        assertEquals(book, descSortedBooks.get(4));
+        assertEquals(resultBooks.get(4), descSortedBooks.get(0));
+        assertEquals(resultBooks.get(3), descSortedBooks.get(1));
+        assertEquals(resultBooks.get(2), descSortedBooks.get(2));
+        assertEquals(resultBooks.get(1), descSortedBooks.get(3));
+        assertEquals(resultBooks.get(0), descSortedBooks.get(4));
     }
 
     @Test

@@ -1,14 +1,17 @@
 package com.xavierkress.springdata.basicExample.model;
 
-import org.springframework.data.annotation.Id;
+
+import javax.persistence.*;
 import java.util.Objects;
 
-
+@Entity
 public class Book {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
+    @Column(name = "name", nullable = false,length = 50)
     private String title;
 
     private String isbn;
@@ -21,11 +24,11 @@ public class Book {
         this.isbn = isbn;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -50,13 +53,21 @@ public class Book {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return Objects.equals(getId(), book.getId()) &&
-                Objects.equals(getTitle(), book.getTitle()) &&
+        return Objects.equals(getTitle(), book.getTitle()) &&
                 Objects.equals(getIsbn(), book.getIsbn());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getTitle(), getIsbn());
+
+        return Objects.hash(getTitle(), getIsbn());
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "title='" + title + '\'' +
+                ", isbn='" + isbn + '\'' +
+                '}';
     }
 }
