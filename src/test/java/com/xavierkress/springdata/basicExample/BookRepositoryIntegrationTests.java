@@ -83,4 +83,11 @@ public class BookRepositoryIntegrationTests {
         assertEquals(1, pagedBooks2.size());
     }
 
+    @Test
+    public void testCallbacks(){
+        Book b = new Book("title", "isbn");
+        books.save(b);
+        books.flush();
+    }
+
 }

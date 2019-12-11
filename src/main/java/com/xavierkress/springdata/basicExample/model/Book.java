@@ -5,6 +5,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
+@EntityListeners({BookListener.class})
 public class Book {
 
     @Id
